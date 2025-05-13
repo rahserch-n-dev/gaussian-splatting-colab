@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints
+
+# Colab & runtime
+.env
+.DS_Store
+
+# Logs and outputs
+*.log
+*.pt
+*.ply
+*.png
+*.mp4
