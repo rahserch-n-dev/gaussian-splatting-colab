@@ -1,28 +1,33 @@
-## Gaussian Splatting Colab (A100-Optimized)
+# Gaussian Splatting Colab
 
-This repo contains a ready-to-run Google Colab pipeline for 3D Gaussian Splatting using high-powered A100 GPUs.
+This project demonstrates the Gaussian Splatting pipeline using Google Colab and an A100 GPU.
 
-## Features
+## Project Structure
 
-- Headless COLMAP installation
-- Gaussian Splatting pipeline
-- Fast training via A100
-- Support for image upload or Google Drive mount
+- `src/` - Source code (to be populated)
+- `scripts/` - Automation and pipeline scripts
+- `notebooks/` - Jupyter/Colab notebooks
+- `tests/` - Unit and integration tests
+- `docs/` - Documentation and guides
 
-## Quick Start
+## Setup
 
-1. Open `Gaussian_Splatting_Colab.ipynb` in Google Colab.
-2. Upload your image set or mount Drive.
-3. Run the cells to generate splats.
+1. Install Python 3.9+
 
-## Folder Layout
+2. Create a virtual environment:
 
-- `scripts/` — Python helper scripts for COLMAP and training
-- `Gaussian_Splatting_Colab.ipynb` — The main Colab notebook
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate
+   ```
 
-## Dependencies
+3. Install dependencies:
 
-- Python 3.10+
-- PyTorch w/ CUDA
-- COLMAP
-- Gaussian Splatting Repo (Inria) gaussian-splatting-colab
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Development
+
+- Use `pre-commit` for code style and linting.
+- See `docs/` for more details.

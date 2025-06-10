@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "gaussian-splatting-colab"
+version = "0.1.0"
+description = "Gaussian Splatting pipeline for Colab"
+authors = ["Your Name <your@email.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.12"
+torch = "*"
+torchvision = "*"
+torchaudio = "*"
+
+[tool.poetry.dev-dependencies]
+black = "*"
+isort = "*"
+flake8 = "*"
+mypy = "*"
+pre-commit = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
