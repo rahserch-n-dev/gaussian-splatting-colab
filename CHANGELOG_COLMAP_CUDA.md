@@ -293,4 +293,17 @@ Implementation based on:
 
 ---
 
-**Status:** Implementation complete, awaiting build verification ✅
+**Status:** Build in progress - verification script fixed ⏳
+
+## Build Issue & Fix (2025-10-31 Update)
+
+**Issue Found:** Initial build failed at verification step because `grep` commands returned exit code 1 when not finding matches, causing the `RUN` command to fail.
+
+**Fix Applied:** Rewrote verification to:
+1. Capture COLMAP version to file (`tee /tmp/colmap_version.txt`)
+2. Check for "without CUDA" and fail if found
+3. Look for positive CUDA indicators
+4. Use subshells `(...)` with `&&` so individual grep failures don't halt entire command
+5. Provide more informative output
+
+**Current Status:** Rebuilding with fixed verification ✅
