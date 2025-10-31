@@ -3,6 +3,11 @@ __pycache__/
 *.py[cod]
 *.so
 *.egg-info/
+.venv/
+venv/
+*.egg
+dist/
+build/
 
 # Jupyter
 .ipynb_checkpoints
@@ -11,9 +16,37 @@ __pycache__/
 .env
 .DS_Store
 
+# Docker
+.dockerignore
+
 # Logs and outputs
 *.log
 *.pt
 *.ply
 *.png
+*.jpg
+*.jpeg
+*.heic
 *.mp4
+
+# COLMAP outputs
+scenes/*/sparse/
+scenes/*/dense/
+scenes/*/distorted/
+scenes/*/stereo/
+scenes/*/fused.ply
+scenes/*/database.db
+scenes/*/logs/
+
+# Training outputs
+scenes/*/output/
+scenes/*/point_cloud/
+
+# System files
+.cache/
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.bak
