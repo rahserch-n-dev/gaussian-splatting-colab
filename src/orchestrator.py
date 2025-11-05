@@ -3,6 +3,7 @@
 This module centralizes steps used in notebooks: prepare scene, run COLMAP, convert outputs, and train.
 Functions are intentionally thin and delegate to the src.* modules so they stay testable.
 """
+
 from __future__ import annotations
 
 import os
@@ -30,7 +31,12 @@ def prepare_scene_from_dir(src_images_dir: str, scene_name: str) -> str:
     return scene_base
 
 
-def run_full_pipeline(scene_name: str, src_images_dir: Optional[str] = None, aabb_scale: int = 16, iterations: int = 30000) -> None:
+def run_full_pipeline(
+    scene_name: str,
+    src_images_dir: Optional[str] = None,
+    aabb_scale: int = 16,
+    iterations: int = 30000,
+) -> None:
     """Run the full pipeline for a scene.
 
     If src_images_dir is provided, images are copied into `scenes/<scene_name>/images` first.
@@ -45,9 +51,19 @@ def run_full_pipeline(scene_name: str, src_images_dir: Optional[str] = None, aab
         raise FileNotFoundError(f"Images folder missing: {images_dir}")
 
     # 1) COLMAP (includes conversion to Gaussian Splatting format)
-    colmap_mod.run_colmap(images_dir, scene_base, aabb_scale=aabb_scale, wrapper_script=os.path.join("scripts", "run-colmap.py"))
+    colmap_mod.run_colmap(
+        images_dir,
+        scene_base,
+        aabb_scale=aabb_scale,
+        wrapper_script=os.path.join("scripts", "run-colmap.py"),
+    )
 
     # Note: The COLMAP convert.py script handles conversion, so no separate step needed
 
     # 2) Train
-    training_mod.run_training(scene_base, pipeline="gaussian", iterations=iterations, wrapper_script=os.path.join("scripts", "train.py"))
+    training_mod.run_training(
+        scene_base,
+        pipeline="gaussian",
+        iterations=iterations,
+        wrapper_script=os.path.join("scripts", "train.py"),
+    )
