@@ -77,7 +77,9 @@ def run_colmap(
         cmd.append("--no_gpu")
 
     gpu_status = "enabled" if use_gpu else "disabled"
-    print("Running COLMAP reconstruction (GPU {}): {}".format(gpu_status, " ".join(cmd)))
+    print(
+        "Running COLMAP reconstruction (GPU {}): {}".format(gpu_status, " ".join(cmd))
+    )
 
     # Ensure logs directory exists under the scene output path
     logs_dir = os.path.join(output_path, "logs")

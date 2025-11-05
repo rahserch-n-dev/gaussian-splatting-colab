@@ -3,6 +3,7 @@
 import argparse
 import sys
 from pathlib import Path
+from typing import Optional
 
 try:
     from PIL import Image
@@ -14,7 +15,9 @@ except ImportError:
     sys.exit(1)
 
 
-def convert_heic_to_jpg(input_dir: str, output_dir: str = None, quality: int = 95):
+def convert_heic_to_jpg(
+    input_dir: str, output_dir: Optional[str] = None, quality: int = 95
+):
     """Convert all HEIC files in input_dir to JPG.
 
     Args:
