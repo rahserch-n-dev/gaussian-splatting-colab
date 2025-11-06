@@ -3,11 +3,11 @@
 Use from PowerShell or any terminal after activating the project's venv.
 
 Examples:
-    python .\scripts\run_local.py --check
-    python .\scripts\run_local.py --scene myscene --run
+    python .\\scripts\\run_local.py --check
+    python .\\scripts\\run_local.py --scene myscene --run
 """
+
 import argparse
-import importlib
 import os
 import subprocess
 import sys
@@ -15,11 +15,11 @@ import sys
 # Ensure project root is on sys.path so `src` imports work when running scripts directly.
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if REPO_ROOT not in sys.path:
-        sys.path.insert(0, REPO_ROOT)
+    sys.path.insert(0, REPO_ROOT)
 
-from src.core import env
 from src import colmap as colmap_mod
 from src import training as training_mod
+from src.core import env
 
 
 def check_python():
@@ -58,10 +58,17 @@ def verify_scene(scene_name: str):
 def run_colmap_if_present(scene_name: str):
     local_script = os.path.join("scripts", "run-colmap.py")
     try:
-        colmap_mod.run_colmap(os.path.join("scenes", scene_name, "images"), os.path.join("scenes", scene_name), wrapper_script=local_script)
+        colmap_mod.run_colmap(
+            os.path.join("scenes", scene_name, "images"),
+            os.path.join("scenes", scene_name),
+            wrapper_script=local_script,
+        )
     except FileNotFoundError:
-        print("No wrapper script found and system COLMAP not available. Install COLMAP or provide scripts/run-colmap.py")
-    except subprocess.CalledProcessError as e:
+        print(
+            "No wrapper script found and system COLMAP not available. "
+            "Install COLMAP or provide scripts/run-colmap.py"
+        )
+    except subprocess.CalledProcessError:
         # Provide guidance and point to colmap log if available
         logs_path = os.path.join("scenes", scene_name, "logs", "colmap.log")
         if os.path.exists(logs_path):
@@ -72,18 +79,32 @@ def run_colmap_if_present(scene_name: str):
 def run_train_if_present(scene_name: str):
     local_script = os.path.join("scripts", "train.py")
     try:
-        training_mod.run_training(os.path.join("scenes", scene_name), wrapper_script=local_script)
+        training_mod.run_training(
+            os.path.join("scenes", scene_name), wrapper_script=local_script
+        )
     except FileNotFoundError:
-        print("No training wrapper script found at scripts/train.py — please add one or call training manually.")
-    except subprocess.CalledProcessError as e:
+        print(
+            "No training wrapper script found at scripts/train.py — "
+            "please add one or call training manually."
+        )
+    except subprocess.CalledProcessError:
         raise
 
 
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--check", action="store_true", help="Run environment checks only")
-    p.add_argument("--scene", type=str, default="myscene", help="Scene name under scenes/<name>/images")
-    p.add_argument("--run", action="store_true", help="Run the standard pipeline (colmap conversion + train) if scripts are present")
+    p.add_argument(
+        "--scene",
+        type=str,
+        default="myscene",
+        help="Scene name under scenes/<name>/images",
+    )
+    p.add_argument(
+        "--run",
+        action="store_true",
+        help="Run the standard pipeline (colmap conversion + train) if scripts are present",
+    )
     args = p.parse_args()
 
     check_python()

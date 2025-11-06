@@ -2,12 +2,13 @@
 
 Keep this lightweight so tests can import it without heavy dependencies.
 """
+
 from __future__ import annotations
 
 import importlib
 import platform
 import sys
-from typing import Dict, Any
+from typing import Any, Dict
 
 
 def get_python_info() -> Dict[str, Any]:
@@ -35,4 +36,8 @@ def get_torch_info() -> Dict[str, Any]:
 
 
 def full_env_report() -> Dict[str, Any]:
-    return {"python": get_python_info(), "system": get_system_info(), "torch": get_torch_info()}
+    return {
+        "python": get_python_info(),
+        "system": get_system_info(),
+        "torch": get_torch_info(),
+    }

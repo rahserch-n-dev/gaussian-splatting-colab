@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-"""Wrapper CLI to run training via src.training.run_training
-"""
+"""Wrapper CLI to run training via src.training.run_training"""
 import argparse
-import os, sys
+import os
+import sys
+
 # Ensure project root is on sys.path
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if REPO_ROOT not in sys.path:
@@ -17,7 +18,12 @@ def main():
     p.add_argument("--pipeline", default="gaussian")
     p.add_argument("--iterations", type=int, default=30000)
     args = p.parse_args()
-    run_training(args.scene, pipeline=args.pipeline, iterations=args.iterations, wrapper_script=None)
+    run_training(
+        args.scene,
+        pipeline=args.pipeline,
+        iterations=args.iterations,
+        wrapper_script=None,
+    )
 
 
 if __name__ == "__main__":

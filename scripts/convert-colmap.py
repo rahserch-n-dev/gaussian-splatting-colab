@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-"""Wrapper CLI to run conversion step via src.convert.run_convert
-"""
+"""Wrapper CLI to run conversion step via src.convert.run_convert"""
 import argparse
-import os, sys
+import os
+import sys
+
 # Ensure project root is on sys.path
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if REPO_ROOT not in sys.path:
